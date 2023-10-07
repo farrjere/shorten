@@ -1,0 +1,47 @@
+package main
+
+templ hello(name string) {
+    <div>Hello, { name }</div>
+}
+
+templ RegistrationForm(){
+    <form id="registrationForm" method="POST" hx-post="/register" hx-target="#registrationForm" hx-swap="outerHTML">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email"/><br/>
+        <label for="target">Target Url:</label>
+        <input type="text" id="longurl" name="longurl"/><br/>
+        <button class="border border-gray-700 bg-gray-700 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-800 focus:outline-none focus:shadow-outline" type="submit">Register</button>
+    </form>
+}
+
+templ RegistrationResponse(resp ShortenResponse){
+   <div id="responseContainer">
+     if resp.Success {
+        <p>Success! you have shortened your url.</p>
+        <p>The requested url {resp.Longurl} can be found at <a href={templ.URL(resp.Shortcode)}>{resp.Shortcode}</a></p>
+     } else {
+        <p>Sorry, {resp.Email} but there was an error processing your shorten request {resp.Status}, check your url and email.</p>
+     }
+     <form  hx-get="/reset" method="GET" hx-target="#responseContainer" hx-swap="outerHTML">
+        <button class="border border-gray-700 bg-gray-700 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-800 focus:outline-none focus:shadow-outline" type="submit">Register Another</button>
+     </form>
+   </div>
+}
+
+templ Page(contents templ.Component) {
+	<html>
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<title>Shorten</title>
+			<script src="/static/htmx.min.js"></script>
+            <link href="/static/output.css" rel="stylesheet"></link>
+		</head>
+		<body>
+        <div class="h-screen grid grid-rows-2 items-center justify-center dark" dark:bg-slate-800>
+            <div class="row"><h1 class="text-5xl">Shorten!</h1></div>
+            <div class="row">{! contents }</div>
+        </div>
+        </body>
+	</html>
+}

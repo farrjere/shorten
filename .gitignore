@@ -22,3 +22,4 @@ go.work
 shortener
 urls.dyli
 node_modules
+*.db
