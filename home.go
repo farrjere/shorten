@@ -137,7 +137,7 @@ func main() {
 
 	e := echo.New()
 	e.Static("/static", "assets")
-	e.GET("/index.html", renderHome)
+	e.GET("/", renderHome)
 	e.GET("/reset", renderReset)
 	e.GET("/:short", redirectShort)
 	e.POST("/register", registerUrl)
