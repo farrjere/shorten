@@ -1,4 +1,4 @@
-module github.com/farrjere/shortener
+module github.com/farrjere/shorten
 
 go 1.21.0
 

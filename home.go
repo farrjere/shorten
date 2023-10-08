@@ -10,7 +10,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/farrjere/shortener/repo"
+	"github.com/farrjere/shorten/repo"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/gommon/log"
 	_ "github.com/mattn/go-sqlite3"
